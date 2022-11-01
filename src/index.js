@@ -1,7 +1,7 @@
 import './index.html'
 import './index.scss'
-import { mult, sum } from "./modules/calc";
+import './modules/calc';
+import {mult, sum} from "./modules/calc";
 
-
-console.log(mult(2, 4))
-console.log(sum(12, 3))
+console.log(sum(2, 2))
+console.log(mult(5, 2))

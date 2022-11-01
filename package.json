@@ -1,5 +1,5 @@
 {
-  "name": "alpine-js-modal-controller",
+  "name": "webpack-base-config",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -31,6 +31,7 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.12.1"
+    "@babel/polyfill": "^7.12.1",
+    "alpinejs": "^3.10.5"
   }
 }
