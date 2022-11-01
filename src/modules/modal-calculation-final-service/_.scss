@@ -1,0 +1,16 @@
+//.modal-calculation-final-service
+
+.modal-calculation-final-service {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 25px;
+    color: color('color4');
+    cursor: pointer;
+    height: 37px;
+    &:not(:last-child) {
+        border-bottom: 1px solid #F0F0F5;
+    }
+}

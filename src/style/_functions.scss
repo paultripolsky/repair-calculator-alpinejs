@@ -1,0 +1,28 @@
+@use "sass:map";
+
+// Получение цвета из массива (map)
+
+@function color($color) {
+	@return map.get($colors, $color);
+}
+
+
+// Получение значения z-index
+
+@function z($item) {
+	@return map.get($z, $item);
+}
+
+// Первод px в rem
+
+@function rem($pixels, $context: $baseFontSize) {
+	@if (unitless($pixels)) {
+		$pixels: $pixels * 1px;
+	}
+	
+	@if (unitless($context)) {
+		$context: $context * 1px;
+	}
+	
+	@return $pixels / $context * 1rem;
+}

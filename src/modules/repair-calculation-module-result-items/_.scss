@@ -1,0 +1,53 @@
+//.repair-calculation-module-result-items
+
+.repair-calculation-module-result-items {
+    display: flex;
+
+    //.repair-calculation-module-result-items__wrapper
+
+    &__wrapper {
+        width: 100%;
+        max-height: 235px;
+        height: 235px;
+        flex-direction: column;
+        overflow-y: auto;
+        display: flex;
+        border: 1px solid #E3E5E5;
+        scrollbar-color: #00a19c#F0F2F2;
+        scrollbar-width: thin;
+        &::-webkit-scrollbar {
+            height: 100%;
+            width: 8px;
+        }
+        &::-webkit-scrollbar-track {
+            background-color: #F0F2F2;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: color('main');
+        }
+    }
+
+    //.repair-calculation-module-result-items__nothing
+
+    &__nothing {
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 40px;
+        color: color('color6');
+        width: 80%;
+        height: 233px;
+        padding: 30px 0 0 20px;
+        display: inline-block;
+        flex-direction: column;
+        @media only screen and (max-width: 992px) {
+            font-size: 18px;
+            line-height: 24px;
+        }
+
+        //.repair-calculation-module-result-items__nothing--green
+
+        &--green {
+            color: color('main');
+        }
+    }
+}

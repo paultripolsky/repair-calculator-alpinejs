@@ -1,0 +1,89 @@
+//.modal-calculation
+
+.modal-calculation {
+
+    //.modal-calculation__row
+
+    &__row {
+        margin-top: 5px;
+    }
+
+    //.modal-calculation__input
+
+    &__input {
+        margin-top: 11px;
+    }
+
+    //.modal-calculation__btn-action
+
+    &__btn-action {
+        margin-top: 35px;
+        @media only screen and (max-width: 992px){
+            display: none;
+        }
+    }
+
+    //.modal-calculation__col
+
+    &__col {
+        &:first-child {
+            margin-right: 79px;
+            width: 328px;
+        }
+        &:last-child {
+            width: 387px;
+        }
+        @media only screen and (max-width: 992px){
+            &:first-child, &:last-child {
+                width: 100%;
+            }
+        }
+    }
+
+    //.modal-calculation__content
+
+    &__content {
+        @media only screen and (max-width: 992px){
+            padding: 25px 16px 100px 16px;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    //.modal-calculation__mb-btn-action
+
+    &__mb-btn-action {
+        display: none;
+        @media only screen and (max-width: 992px){
+            display: block;
+            position: fixed;
+            bottom: 25px;
+            width: calc(100% - 36px);
+            margin: 0 auto;
+        }
+    }
+
+    & .repair-calculation-switcher__wrapper, .repair-calculation-switcher__menu {
+        padding: 0;
+    }
+
+    //.modal-calculation__mb-change-station
+
+    &__mb-change-station {
+        display: none;
+        @media only screen and (max-width: 992px){
+            position: relative;
+            display: block;
+        }
+    }
+
+    //.modal-calculation__repair-calculation-module-map
+
+    & .repair-calculation-module-map {
+        display: none;
+        @media only screen and (max-width: 992px){
+            display: block;
+            margin-top: 12px
+        }
+    }
+}

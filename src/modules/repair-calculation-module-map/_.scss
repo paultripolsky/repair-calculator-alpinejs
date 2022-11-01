@@ -1,0 +1,15 @@
+//.repair-calculation-module-map
+
+.repair-calculation-module-map {
+    
+    @media only screen and (max-width: 992px) {
+        display: none;
+    }
+
+    //.repair-calculation-module-map__wrapper
+
+    &__wrapper {
+        width: 100%;
+        height: 335px;
+    }
+}

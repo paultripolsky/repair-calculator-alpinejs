@@ -1,0 +1,126 @@
+//.modal
+
+.modal {
+    position: fixed;
+    overflow: auto;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    background: rgba(31,32,33,.9);
+    display: none;
+    scrollbar-color: #00a19c#F0F2F2;
+    scrollbar-width: thin;
+    &::-webkit-scrollbar {
+        height: 100%;
+        width: 8px;
+    }
+    &::-webkit-scrollbar-track {
+        background-color: #F0F2F2;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: color('main');
+    }
+
+    //.modal__headline
+
+    &__headline {
+        @include reset-h;
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 40px;
+        color: color('black');
+    }
+
+    //.modal__content
+
+    &__content {
+        padding: 50px 100px 50px 100px;
+        background-color: color('white');
+        position: relative;
+    }
+
+    //.modal__dsc
+
+    &__dsc {
+        @include reset-p;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        color: color('color6');
+        margin-top: 6px;
+    }
+
+    //.modal__content
+
+    &__content {
+        @media only screen and (max-width: 992px){
+            overflow: auto;
+            scrollbar-color: #00a19c#F0F2F2;
+            scrollbar-width: thin;
+            &::-webkit-scrollbar {
+                height: 100%;
+                width: 8px;
+            }
+            &::-webkit-scrollbar-track {
+                background-color: #F0F2F2;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: color('main');
+            }
+        }
+    }
+
+    //.modal__row
+
+    &__row {
+        display: flex;
+        @media only screen and (max-width: 992px) {
+            flex-direction: column;
+        }
+    }
+
+    //.modal--active
+
+    &--active {
+        display: flex;
+        & .modal__content {
+            animation: scale .3s ease;
+        }
+    }
+
+    & textarea {
+        padding-top: 15px;
+        padding-right: 15px;
+        resize: none;
+    }
+
+    //.modal__close
+
+    &__close {
+        position: absolute;
+        top: 50px;
+        right: 50px;
+        cursor: pointer;
+        @media only screen and (max-width: 992px) {
+            top: 35px;
+            right: 20px;
+        }
+    }
+
+
+}
+
+@keyframes scale {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(100px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}

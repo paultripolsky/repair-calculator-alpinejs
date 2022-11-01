@@ -1,0 +1,50 @@
+//.repair-calculation-section
+
+.repair-calculation-section {
+
+    height: 700px;
+    padding: 60px 0 80px 0;
+
+    @media only screen and (max-width: 992px) {
+        padding: 38px 0 50px 0;
+        height: auto;
+    }
+
+    //.repair-calculation-section__wrapper
+
+    &__wrapper {
+        width: 100%;
+        height: 100%;
+
+    }
+
+    //.repair-calculation-section__headline
+
+    &__headline {
+        color: color('black');
+    }
+
+    //.repair-calculation-section__dsc
+
+    &__dsc {
+        @include reset-p;
+        color: color('color6');
+        margin-top: 6px;
+        @media only screen and (max-width: 992px){
+            margin-top: 2px;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+        }
+    }
+
+    //.repair-calculation-section__repair-calculation-module
+
+    &__repair-calculation-module {
+        margin-top: 26px;
+        padding: 0 10px;
+        @media only screen and (max-width: 992px){
+            margin-top: 16px;
+        }
+    }
+}

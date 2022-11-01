@@ -1,0 +1,32 @@
+//.modal-calculation-final-price
+
+.modal-calculation-final-price {
+
+    //.modal-calculation-final-price__headline
+
+    &__headline {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+        color: #B3BABA;
+    }
+
+    //.modal-calculation-final-price__amount
+
+    &__amount {
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 30px;
+        color: color('color4');
+    }
+
+    //.modal-calculation-final-price__privacy
+
+    &__privacy {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        color: #B3BABA;
+        margin-top: 4px;
+    }
+}

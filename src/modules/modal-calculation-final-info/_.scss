@@ -1,0 +1,23 @@
+//.modal-calculation-final-info
+
+.modal-calculation-final-info {
+
+    //.modal-calculation-final-info__headline
+
+    &__headline {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+        color: #B3BABA;
+    }
+
+    //.modal-calculation-final-info__information
+
+    &__information {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        color: color('color4');
+    }
+}
+

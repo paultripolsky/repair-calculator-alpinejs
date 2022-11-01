@@ -1,0 +1,49 @@
+//.repair-calculation-switcher-dropdown
+
+.repair-calculation-switcher-dropdown {
+
+    //.repair-calculation-switcher-dropdown__headline
+
+    &__headline {
+        height: 50px;
+        padding-left: 44px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        cursor: pointer;
+        border-bottom: 1px solid #E3E5E5 ;
+        position: relative;
+        background-color: rgba(240, 242, 242, 0.5);
+        color: color('color4');
+        &:after {
+            position: absolute;
+            content: '';
+            width: 24px;
+            height: 24px;
+            transform: rotate(180deg);
+            background: url('images/droprown-menu-arrow.svg') center no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            left: 10px;
+            transition: transform .2s ease;
+        }
+    }
+
+    &__items {
+        @include reset-list;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+//.repair-calculation-switcher-dropdown.js-collapse--active
+
+.repair-calculation-switcher-dropdown.js-collapse--active {
+    &>.repair-calculation-switcher-dropdown__headline {
+
+        &:after {
+            transform: rotate(0);
+        }
+    }
+}

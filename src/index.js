@@ -1,7 +1,14 @@
+import Alpine from "alpinejs";
+
+import './modules/repair-calculation-module/_'
+import './modules/js-switcher/_'
+import './modules/js-search/_'
+import './modules/js-collapse/_'
+import './modules/js-station-switcher/_'
+import './modules/js-modal-controller/_'
+import './modules/input/_'
+
 import './index.html'
 import './index.scss'
-import './modules/calc';
-import {mult, sum} from "./modules/calc";
 
-console.log(sum(2, 2))
-console.log(mult(5, 2))
+Alpine.start()

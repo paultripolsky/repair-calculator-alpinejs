@@ -1,0 +1,30 @@
+//.js-switcher
+
+.js-switcher {
+
+    //.js-switcher__menu
+
+    &__menu {
+        display: none;
+    }
+
+    //.js-switcher--active
+
+    &--active {
+        & .js-switcher__menu {
+            display: flex;
+            animation: switcher-opacity .2s ease-in-out;
+        }
+    }
+}
+
+@keyframes switcher-opacity {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

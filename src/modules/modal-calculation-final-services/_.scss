@@ -1,0 +1,25 @@
+//.modal-calculation-final-services
+
+.modal-calculation-final-services {
+    display: flex;
+    flex-direction: column;
+    @include reset-list;
+    width: 100%;
+    padding: 0 20px;
+    border-top: 1px solid #F0F0F5;
+    border-bottom: 1px solid #F0F0F5;
+    max-height: 140px;
+    overflow: auto;
+    scrollbar-color: #00a19c#F0F2F2;
+    scrollbar-width: thin;
+    &::-webkit-scrollbar {
+        height: 100%;
+        width: 8px;
+    }
+    &::-webkit-scrollbar-track {
+        background-color: #F0F2F2;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: color('main');
+    }
+}

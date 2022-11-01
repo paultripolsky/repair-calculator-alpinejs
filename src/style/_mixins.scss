@@ -1,0 +1,23 @@
+@mixin reset-link {
+	text-decoration: none;
+}
+
+@mixin reset-list {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+@mixin reset-link {
+	text-decoration: none;
+}
+
+@mixin reset-h {
+	margin: 0;
+	padding: 0;
+}
+
+@mixin reset-p {
+	margin: 0;
+	padding: 0;
+}

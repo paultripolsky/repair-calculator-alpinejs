@@ -1,0 +1,11 @@
+.subtitle {
+	@include reset-h;
+	font-weight: 600;
+	font-size: 30px;
+	line-height: 40px;
+	@media only screen and (max-width: 992px){
+		font-weight: 600;
+		font-size: 20px;
+		line-height: 30px;
+	}
+}

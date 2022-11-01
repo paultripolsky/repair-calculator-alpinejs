@@ -8,7 +8,338 @@
 	<title>Document</title>
 </head>
 <body>
-	<h1>Webpack</h1>
-	<div class="image"></div>
+	<section class="repair-calculation-section">
+	<div class="container">
+		<div class="repair-calculation-section__wrapper">
+			<h2 class="subtitle repair-calculation-section__headline">Рассчитайте стоимость ремонта</h2>
+			<p class="repair-calculation-section__dsc">выберите марку, модель и станцию обслуживания</p>
+			<div class="repair-calculation-module repair-calculation-section__repair-calculation-module js-calculation-module" x-data="repairCalculationModule" x-cloak>
+				<div class="repair-calculation-module-row repair-calculation-module__repair-calculation-module-row">
+					<div class="repair-calculation-switcher repair-calculation-module-row__repair-calculation-switcher js-switcher" x-data="switcher">
+						<div class="repair-calculation-switcher__wrapper js-switcher__wrapper">
+							<div class="repair-calculation-switcher__label">Марка</div>
+							<div class="repair-calculation-switcher__input js-switcher__input"></div>
+							<div class="repair-calculation-switcher-menu repair-calculation-switcher__menu js-switcher__menu">
+								<div class="repair-calculation-switcher-menu__wrapper js-search" x-data="search">
+									<input type="text" class="repair-calculation-switcher-menu__search js-search__input" placeholder="Поиск" @input="getSearchResults($store.cars.models, null, event)">
+									<div class="js-search__results">
+										<template x-for="(item, index) of searchResults" :key="index">
+											<li class="repair-calculation-switcher-menu__item js-switcher__item" x-text="item" @click="clickBehavior(); clickOnBrand()" :data-brand="item"></li>
+										</template>
+									</div>
+									<ul class="repair-calculation-switcher-menu__items js-search__hidden">
+										<template x-for="(item, index) in $store.cars.models" :key="index">
+											<li class="repair-calculation-switcher-menu__item js-switcher__item " x-text="item" @click="clickBehavior(); clickOnBrand(); clickOnSearchResultItem()" :data-brand="item"></li>
+										</template>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="repair-calculation-switcher repair-calculation-module-row__repair-calculation-switcher js-switcher" x-data="switcher">
+						<div class="repair-calculation-switcher__wrapper js-switcher__wrapper">
+							<div class="repair-calculation-switcher__label">Модель</div>
+							<div class="repair-calculation-switcher__input js-switcher__input"></div>
+							<div class="repair-calculation-switcher-menu repair-calculation-switcher__menu js-switcher__menu">
+								<div class="repair-calculation-switcher-menu__wrapper js-search" x-data="search">
+									<input type="text" class="repair-calculation-switcher-menu__search js-search__input" placeholder="Поиск" @input="getSearchResults($store.cars.currentCarModels, null, event)">
+									<div class="js-search__results">
+										<template x-for="(item, index) of searchResults" :key="index">
+											<li class="repair-calculation-switcher-menu__item js-switcher__item" x-text="item" @click="clickBehavior(); clickOnModel(); clickOnSearchResultItem()" :data-model="item"></li>
+										</template>
+									</div>
+									<ul class="repair-calculation-switcher-menu__items js-search__hidden">
+										<template x-for="(item, index) in $store.cars.currentCarModels" :key="index">
+											<li class="repair-calculation-switcher-menu__item js-switcher__item" x-text="item" @click="clickBehavior(); clickOnModel()" :data-model="item"></li>
+										</template>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="repair-calculation-switcher repair-calculation-module-row__repair-calculation-switcher js-switcher" x-data="switcher">
+						<div class="repair-calculation-switcher__wrapper js-switcher__wrapper">
+							<div class="repair-calculation-switcher__label">Услуга</div>
+							<div class="repair-calculation-switcher__input js-switcher__input">Выбрано&nbsp<span x-text="$store.calculationModuleCheckedElements.data.length"></span>&nbspуслуг</div>
+							<div class="repair-calculation-switcher-menu repair-calculation-switcher__menu repair-calculation-switcher__menu--large js-switcher__menu">
+								<div class="repair-calculation-switcher-menu__wrapper js-search" x-data="search">
+									<input type="text" class="repair-calculation-switcher-menu__search js-search__input" placeholder="Поиск" @input="getSearchResults($store.calculationModuleCheckedElements.reactiveObjects, 'name', event)">
+									<div class="repair-calculation-switcher-menu__search-results js-search__results">
+										<template x-for="item of searchResults">
+											<div class="repair-calculation-switcher-dropdown-item js-calculation-item" :data-cost="item.cost" :uniqId="item.uniqId" @click="$store.calculationModuleCheckedElements.clickHandler">
+												<input :id="'search-result-service-' + item.uniqId" type="checkbox" class="repair-calculation-switcher-dropdown-item__action" :checked="item.checked">
+												<label :for="'search-result-service-' + item.uniqId" class="repair-calculation-switcher-dropdown-item__label" x-text="item.name"></label>
+												<span class="repair-calculation-switcher-dropdown-item__price" x-text="item.getFormattedCost()"></span>
+											</div>
+										</template>
+									</div>
+									<div class="repair-calculation-switcher-dropdown js-collapse js-search__hidden" x-data="collapse">
+										<div class="repair-calculation-switcher-dropdown__headline js-collapse__input">Автосервис</div>
+										<div class="repair-calculation-switcher-dropdown__content js-collapse__content">
+											<div class="repair-calculation-switcher-dropdown__items">
+												<div type="checkbox" class="repair-calculation-switcher-dropdown-item js-switcher__item js-calculation-item " data-switcher-stop-default-behavior uniqId="1">
+													<input id="data-service-1" type="checkbox" class="repair-calculation-switcher-dropdown-item__action">
+													<label for="data-service-1" class="repair-calculation-switcher-dropdown-item__label">Замена фильтров
+													</label>
+													<span class="repair-calculation-switcher-dropdown-item__price"></span>
+												</div>
+												<div type="checkbox" class="repair-calculation-switcher-dropdown-item js-switcher__item js-calculation-item " data-switcher-stop-default-behavior uniqId="2" data-cost="1000">
+													<input id="data-service-2" type="checkbox" class="repair-calculation-switcher-dropdown-item__action">
+													<label for="data-service-2" class="repair-calculation-switcher-dropdown-item__label">Ремонт ДВС
+													</label>
+													<span class="repair-calculation-switcher-dropdown-item__price"></span>
+												</div>
+												<div type="checkbox" class="repair-calculation-switcher-dropdown-item js-switcher__item js-calculation-item " data-switcher-stop-default-behavior uniqId="3" data-cost="1000">
+													<input id="data-service-3" type="checkbox" class="repair-calculation-switcher-dropdown-item__action">
+													<label for="data-service-3" class="repair-calculation-switcher-dropdown-item__label">Ремонт Трансмиссии
+													</label>
+													<span class="repair-calculation-switcher-dropdown-item__price"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="repair-calculation-switcher-dropdown js-collapse js-search__hidden" x-data="collapse">
+										<div class="repair-calculation-switcher-dropdown__headline js-collapse__input">Автосервис</div>
+										<div class="repair-calculation-switcher-dropdown__content js-collapse__content">
+											<div class="repair-calculation-switcher-dropdown__items">
+												<div type="checkbox" class="repair-calculation-switcher-dropdown-item js-switcher__item js-calculation-item " data-switcher-stop-default-behavior uniqId="4" data-cost="150">
+													<input id="data-service-4" type="checkbox" class="repair-calculation-switcher-dropdown-item__action">
+													<label for="data-service-4" class="repair-calculation-switcher-dropdown-item__label">Замена свечей зажигания
+													</label>
+													<span class="repair-calculation-switcher-dropdown-item__price"></span>
+												</div>
+												<div type="checkbox" class="repair-calculation-switcher-dropdown-item js-switcher__item js-calculation-item " data-switcher-stop-default-behavior uniqId="5" data-cost="3000">
+													<input id="data-service-5" type="checkbox" class="repair-calculation-switcher-dropdown-item__action">
+													<label for="data-service-5" class="repair-calculation-switcher-dropdown-item__label">Ремонт ДВС
+													</label>
+													<span class="repair-calculation-switcher-dropdown-item__price"></span>
+												</div>
+												<div type="checkbox" class="repair-calculation-switcher-dropdown-item js-switcher__item js-calculation-item " data-switcher-stop-default-behavior uniqId="6" data-cost="1000">
+													<input id="data-service-6" type="checkbox" class="repair-calculation-switcher-dropdown-item__action">
+													<label for="data-service-6" class="repair-calculation-switcher-dropdown-item__label">Ремонт Трансмиссии
+													</label>
+													<span class="repair-calculation-switcher-dropdown-item__price"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="repair-calculation-switcher-dropdown js-collapse js-search__hidden" x-data="collapse">
+										<div class="repair-calculation-switcher-dropdown__headline js-collapse__input">Автосервис</div>
+										<div class="repair-calculation-switcher-dropdown__content js-collapse__content">
+											<div class="repair-calculation-switcher-dropdown__items">
+												<div type="checkbox" class="repair-calculation-switcher-dropdown-item js-switcher__item js-calculation-item " data-switcher-stop-default-behavior data-cost="1300" uniqId="7">
+													<input id="data-service-7" type="checkbox" class="repair-calculation-switcher-dropdown-item__action">
+													<label for="data-service-7" class="repair-calculation-switcher-dropdown-item__label">Замена фильтров
+													</label>
+													<span class="repair-calculation-switcher-dropdown-item__price"></span>
+												</div>
+												<div type="checkbox" class="repair-calculation-switcher-dropdown-item js-switcher__item js-calculation-item "  data-switcher-stop-default-behavior data-cost="13500" uniqId="8">
+													<input id="data-service-8" type="checkbox" class="repair-calculation-switcher-dropdown-item__action">
+													<label for="data-service-8" class="repair-calculation-switcher-dropdown-item__label">Ремонт ДВС
+													</label>
+													<span class="repair-calculation-switcher-dropdown-item__price"></span>
+												</div>
+												<div type="checkbox" class="repair-calculation-switcher-dropdown-item js-switcher__item js-calculation-item " data-switcher-stop-default-behavior data-cost="130" uniqId="9">
+													<input id="data-service-9" type="checkbox" class="repair-calculation-switcher-dropdown-item__action">
+													<label for="data-service-9" class="repair-calculation-switcher-dropdown-item__label">Ремонт Трансмиссии
+													</label>
+													<span class="repair-calculation-switcher-dropdown-item__price"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="repair-calculation-switcher repair-calculation-module-row__repair-calculation-switcher js-switcher" x-data="switcher">
+						<div class="repair-calculation-switcher__wrapper js-switcher__wrapper">
+							<div class="repair-calculation-switcher__label">Станция</div>
+							<div class="repair-calculation-switcher__input js-switcher__input">Доваторцев 47Б</div>
+							<div class="repair-calculation-switcher-menu repair-calculation-switcher__menu js-switcher__menu">
+								<div class="repair-calculation-switcher-menu__wrapper">
+									<ul class="repair-calculation-switcher-menu__items">
+										<li class="repair-calculation-switcher-menu__item js-station js-switcher__item" data-station data-coords='{"position":[45.01151530529911,41.929150298237595]}' data-station-name="ABS-AUTO" data-station-address="г. Ставрополь, ул. Доваторцев, 47Б" data-station-phone="+7 (8652) 500-520">Доваторцев 47Б</li>
+										<li class="repair-calculation-switcher-menu__item js-station js-switcher__item" data-station data-coords='{"position":[45.06415955236144,41.92500836441795]}' data-station-name="SINDIKA CENTRE PREMIUM" data-station-address="г. Ставрополь, ул. Кулакова, 33А" data-station-phone="8 (800) 350 29 20">Кулакова 33А</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="repair-calculation-module-row repair-calculation-module__repair-calculation-module-row">
+					<div class="repair-calculation-module-row__col">
+						<div class="repair-calculation-module-result repair-calculation-module__result">
+							<div class="repair-calculation-module-result__wrapper">
+								<div class="repair-calculation-module-result-items repair-calculation-module-result__repair-calculation-module-result-items">
+									<div class="repair-calculation-module-result-items__wrapper">
+										<div class="repair-calculation-module-result-items__nothing js-calculate-nothing-checked">
+											Для рассчёта стоимости, выберите <span class="repair-calculation-module-result-items__nothing--green">модель авто и&nbspуслуги</span>
+										</div>
+										<template x-for="(checkedItem, index) of $store.calculationModuleCheckedElements.data" :key="index">
+											<div class="repair-calculation-switcher-dropdown-item js-calculation-item" :data-cost="checkedItem.cost" :uniqId="checkedItem.uniqId" @click="$store.calculationModuleCheckedElements.clickHandler">
+												<input :id="'checkout-service-' + checkedItem.uniqId" type="checkbox" class="repair-calculation-switcher-dropdown-item__action" checked >
+												<label :for="'checkout-service-' + checkedItem.uniqId" class="repair-calculation-switcher-dropdown-item__label" x-text="checkedItem.name"></label>
+												<span class="repair-calculation-switcher-dropdown-item__price" x-text="checkedItem.getFormattedCost()"></span>
+											</div>
+										</template>
+									</div>
+								</div>
+								<div class="repair-calculation-module-final">
+									<div class="repair-calculation-module-final__nothing js-calculate-nothing-checked">
+										пока ничего не выбрано
+										<button class="btn-action js-modal-trigger" data-modal="modal-calculation">Записаться на сервис</button>
+									</div>
+									<div class="repair-calculation-module-final__wrapper">
+										<div class="repair-calculation-module-final__row">
+											<div class="repair-calculation-module-final__col">
+												<div class="repair-calculation-module-final__label">Итого:</div>
+												<div class="repair-calculation-module-final__cost" x-text="$store.calculationModuleCheckedElements.calculatedCost + ' ' + '₽'"> <span>&nbsp₽</span></div>
+											</div>
+											<div class="repair-calculation-module-final__col">
+												<button class="btn-action repair-calculation-module-final__btn-action js-modal-trigger" data-modal="modal-calculation">Записаться на сервис</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="repair-calculation-module-row__col">
+						<div class="repair-calculation-module-map">
+							<div class="repair-calculation-module-map__wrapper">
+								<div id="changeStation" class="repair-calculation-module-map__map" style="width: 100%; height: 335px"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="repair-calculation-module-row repair-calculation-module__repair-calculation-module-row">
+					<div class="repair-calculation-module-row__col">
+						<button class="btn-action repair-calculation-module-final__btn-action repair-calculation-module-final__btn-action--mobile js-modal-trigger" data-modal="modal-calculation">Записаться на сервис</button>
+					</div>
+				</div>
+				<div class="repair-calculation-module-row repair-calculation-module__repair-calculation-module-row">
+					<div class="repair-calculation-module-row__col">
+						<div class="repair-calculation-module__privacy">* Указана примерная стоимость. Финальный расчет стоимости запчастей и работ рассчитывается индивидуально</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+	<section class="modal modal-calculation" data-modal="modal-calculation">
+		<form class="modal-calculation__content modal__content">
+			<div class="close-modal modal-calculation__close-modal modal__close js-modal-close" data-modal="modal-calculation">
+				<svg class="close-modal__img" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="#18191B"/>
+				</svg>
+			</div>
+			<h3 class="modal__headline modal-calculation__headline">Оставьте заявку</h3>
+			<p class="modal__dsc modal-calculation__dsc">введите ваше имя и номер телефона, а также проверьте ваш заказ</p>
+			<div class="modal-inputs modal-calculation__inputs">
+				<div class="modal__row modal-calculation__row">
+					<div class="modal-calculation__col">
+						<div class="input modal-calculation__input">
+							<span class="input__label">Имя</span>
+							<input type="text" class="input__action" required placeholder="Введите имя">
+						</div>
+						<div class="input modal-calculation__input">
+							<span class="input__label">Телефон</span>
+							<input type="text" class="input__action" required placeholder="+7 (999) 999-99-99" data-tel-input>
+						</div>
+						<div class="input modal-calculation__input">
+							<div class="modal-calculation__mb-change-station js-calculation-module" x-data="repairCalculationModule" x-cloak>
+								<span class="input__label">Станция</span>
+								<div class="repair-calculation-switcher modal-calculation__repair-calculation-switcher js-switcher" x-data="switcher">
+									<div class="repair-calculation-switcher__wrapper js-switcher__wrapper">
+										<div class="repair-calculation-switcher__input js-switcher__input">Доваторцев 47Б</div>
+										<div class="repair-calculation-switcher-menu repair-calculation-switcher__menu js-switcher__menu">
+											<div class="repair-calculation-switcher-menu__wrapper">
+												<ul class="repair-calculation-switcher-menu__items">
+													<li class="repair-calculation-switcher-menu__item js-station js-switcher__item" data-station data-coords='{"position":[45.01151530529911,41.929150298237595]}' data-station-name="ABS-AUTO" data-station-address="г. Ставрополь, ул. Доваторцев, 47Б" data-station-phone="+7 (8652) 500-520">Доваторцев 47Б</li>
+													<li class="repair-calculation-switcher-menu__item js-station js-switcher__item" data-station data-coords='{"position":[45.06415955236144,41.92500836441795]}' data-station-name="SINDIKA CENTRE PREMIUM" data-station-address="г. Ставрополь, ул. Кулакова, 33А" data-station-phone="8 (800) 350 29 20">Кулакова 33А</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="repair-calculation-module-map modal-calculation__repair-calculation-module-map">
+							<div class="repair-calculation-module-map__wrapper">
+								<div id="changeStationInModal" class="repair-calculation-module-map__map" style="width: 101%; height: 335px"></div>
+							</div>
+						</div>
+						<button class="btn-action modal-calculation__btn-action" type="submit">Записаться на сервис</button>
+					</div>
+					<div class="modal-calculation__col">
+						<div class="modal-calculation__input">
+							<div class="modal-calculation-final">
+								<div class="modal-calculation-final__row">
+									<div class="modal-calculation-final__col">
+										<div class="modal-calculation-final-info">
+											<div class="modal-calculation-final-info__headline">
+												Автомобиль
+											</div>
+											<div class="modal-calculation-final-info__information" x-data x-text="$store.cars.getFullCarName()"></div>
+										</div>
+									</div>
+									<div class="modal-calculation-final__col">
+										<div class="modal-calculation-final-info">
+											<div class="modal-calculation-final-info__headline">
+												Сервис
+											</div>
+											<div class="modal-calculation-final-info__information" x-data x-text="$store.currentStation.data">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="modal-calculation-final__row">
+									<div class="modal-calculation-final__col">
+										<div class="modal-calculation-final-info">
+											<div class="modal-calculation-final-info__headline">
+												Выбранные услуги
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="modal-calculation-final__row">
+									<ul class="modal-calculation-final-services">
+										<template x-for="(checkedItem, index) of $store.calculationModuleCheckedElements.data" :key="index" x-data>
+											<li class="modal-calculation-final-service" :data-cost="checkedItem.cost" :uniqId="checkedItem.uniqId" @click="$store.calculationModuleCheckedElements.clickHandler">
+												<div class="modal-calculation-final-service__name" x-text="checkedItem.name"></div>
+												<div class="modal-calculation-final-service__icon">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M16.295 7.705C15.9056 7.31564 15.2744 7.31564 14.885 7.705L12 10.59L9.115 7.705C8.72564 7.31564 8.09436 7.31564 7.705 7.705C7.31564 8.09436 7.31564 8.72564 7.705 9.115L10.59 12L7.705 14.885C7.31564 15.2744 7.31564 15.9056 7.705 16.295C8.09436 16.6844 8.72564 16.6844 9.115 16.295L12 13.41L14.885 16.295C15.2744 16.6844 15.9056 16.6844 16.295 16.295C16.6844 15.9056 16.6844 15.2744 16.295 14.885L13.41 12L16.295 9.115C16.6844 8.72564 16.6844 8.09436 16.295 7.705Z" fill="#D60B0B"/>
+													</svg>
+												</div>
+											</li>
+										</template>
+									</ul>
+								</div>
+								<div class="modal-calculation-final__row">
+									<div class="modal-calculation-final__col">
+										<div class="modal-calculation-final-price">
+											<div class="modal-calculation-final-price__headline">Итого:</div>
+											<div class="modal-calculation-final-price__amount" x-text="$store.calculationModuleCheckedElements.calculatedCost + ' ' + '₽'" x-data></div>
+											<div class="modal-calculation-final-price__privacy">
+												* Указана примерная стоимость. Финальный расчет стоимости запчастей и работ рассчитывается индивидуально
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<button class="btn-action modal-calculation__mb-btn-action">Записаться на сервис</button>
+		</form>
+	</section>
+	
+	
+	<script src="https://api-maps.yandex.ru/2.1/?apikey=6be613d1-e4df-447b-8e9a-b6c8eab20414&lang=ru_RU"
+	        type="text/javascript" xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg">
+	</script>
 </body>
 </html>

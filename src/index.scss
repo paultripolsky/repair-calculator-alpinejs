@@ -1,4 +1,35 @@
 @import "style/libs/normilize.css";
+
 @import "style/variables";
+@import 'style/functions';
+@import 'style/mixins';
 @import "style/fonts";
 @import "style/style";
+
+@import 'modules/container/_';
+@import 'modules/subtitle/_';
+@import 'modules/btn-action/_';
+@import 'modules/input/_';
+
+@import 'modules/js-switcher/_';
+@import 'modules/js-collapse/_';
+
+@import 'modules/repair-calculation-section/_';
+@import 'modules/repair-calculation-module/_';
+@import 'modules/repair-calculation-module-row/_';
+@import 'modules/repair-calculation-switcher/_';
+@import 'modules/repair-calculation-switcher-menu/_';
+@import 'modules/repair-calculator-switcher-dropdown/_';
+@import 'modules/repair-calculation-switcher-dropdown-item/_';
+@import 'modules/repair-calculation-module-result/_';
+@import 'modules/repair-calculation-module-final/_';
+@import 'modules/repair-calculation-module-result-items/_';
+@import 'modules/repair-calculation-module-map/_';
+
+@import 'modules/modal/_';
+@import 'modules/modal-calculation/_';
+@import 'modules/modal-calculation-final/_';
+@import 'modules/modal-calculation-final-info/_';
+@import 'modules/modal-calculation-final-services/_';
+@import 'modules/modal-calculation-final-service/_';
+@import 'modules/modal-calculation-final-price/_';

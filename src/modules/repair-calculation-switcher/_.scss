@@ -1,0 +1,103 @@
+//.repair-calculation-switcher
+
+.repair-calculation-switcher {
+
+    //.repair-calculation-switcher__wrapper
+
+    &__wrapper {
+        padding: 0 10px;
+    }
+
+    //.repair-calculation-switcher__input
+
+    &__input {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        border: 1px solid #E3E5E5;
+        padding-left: 20px;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
+
+        &:before {
+            position: absolute;
+            content: '';
+            width: 52px;
+            height: 50px;
+            border-left: 1px solid #E3E5E5;
+            right: 0;
+        }
+
+        &:after {
+            position: absolute;
+            content: '';
+            width: 52px;
+            height: 50px;
+            background: url('images/switcher-arrow-down.svg') center no-repeat;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            right: 0;
+            transition: transform .2s ease;
+        }
+        @media only screen and (max-width: 992px) {
+            font-size: 14px;
+            line-height: 20px;
+        }
+    }
+
+    //.repair-calculation-switcher__menu
+
+    &__menu {
+        position: absolute;
+        top: 95px;
+        left: 0;
+        width: calc(95% + 5px);
+        padding-left: 10px;
+        z-index: 1;
+        @media only screen and (max-width: 992px) {
+            top: 80px;
+            width: 100%;
+        }
+
+        //.repair-calculation-switcher__menu--large
+
+        &--large {
+            width: calc(195% + 5px);
+            @media only screen and (max-width: 992px) {
+                width: 100%;
+            }
+        }
+    }
+
+    //.repair-calculation-switcher__label
+
+    &__label {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+        color: #B3BABA;
+        margin: 0 0 6px 10px;
+        @media only screen and (max-width: 992px) {
+            margin: 0 0 4px 0;
+        }
+    }
+}
+
+//.repair-calculation-switcher.js-switcher--active
+
+.repair-calculation-switcher.js-switcher--active {
+    & .repair-calculation-switcher__input {
+        border: 1px solid #00a19c;
+        &:after {
+            transform: rotate(180deg);
+        }
+        &:before {
+            border-left: 1px solid #00a19c;
+        }
+    }
+}
+
+

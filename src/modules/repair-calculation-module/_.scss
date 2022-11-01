@@ -1,0 +1,35 @@
+//.repair-calculation-module
+
+.repair-calculation-module {
+
+    //.repair-calculation-module__repair-calculation-module-row
+
+    &__repair-calculation-module-row {
+        margin: 0 -20px;
+        &:not(:last-child) {
+            margin-top: 20px;
+            @media only screen and (max-width: 992px) {
+                margin-top: 0;
+            }
+        }
+    }
+
+    //.repair-calculation-module__privacy
+
+    &__privacy {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        color: #B3BABA;
+        width: 90%;
+        margin-top: 10px;
+    }
+
+    //.repair-calculation-module__final
+
+    &__result {
+        @media only screen and (max-width: 992px) {
+            margin-top: 20px;
+        }
+    }
+}
