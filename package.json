@@ -32,6 +32,5 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
-    "alpinejs": "^3.10.5"
   }
 }
